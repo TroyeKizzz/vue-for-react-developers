@@ -15,12 +15,13 @@ const messages = ref(existingMessages);
 
 /**
  * Adds a message to the chat
+ * @param {"text"|"emoji"} type Message type
  * @param {String} content Message content
  */
-function addMessage(content) {
+function addMessage(type, content) {
   const message = {
     content,
-    type: "text", // Hint: you may want to parameterize this
+    type,
     senderId: USER_ID,
     timestamp: new Date(),
   };
