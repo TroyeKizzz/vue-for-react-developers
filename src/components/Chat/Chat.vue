@@ -19,6 +19,18 @@ useAutoScrollToBottom(messageListElement); // Using a "hook".
 
 // Provide the active user's id to all components in this tree. Similar to providing a React Context.
 provide("userId", USER_ID);
+
+function addMessage(textMessage) {
+  console.log("New message: ", textMessage);
+
+  const newMessage = {
+    content: textMessage,
+    type: "text",
+    senderId: USER_ID,
+    timestamp: new Date(),
+  };
+  messages.value = [...messages.value, newMessage];
+}
 </script>
 
 <template>
@@ -37,8 +49,8 @@ provide("userId", USER_ID);
                  Make the <Compose /> component call this function whenever a 'send' event is emitted.
 
            Tip:  In your function, you can replace 'messages.value' directly ie. 'messages.value = [...messages.value, newMessage]'
-      -->           
-      <Compose />
+      -->
+      <Compose @send="addMessage" />
     </div>
   </CenterOnPage>
 </template>
